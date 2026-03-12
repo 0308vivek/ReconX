@@ -37,7 +37,7 @@ const analyzeHeaders = async (domain) => {
 /**
  * Generate risk score
  */
-const calculateRiskScore = (headerAnalysis, portData, dirData) => {
+const calculateRiskScore = (headerAnalysis, portData, sslData, dirData) => {
     let score = 1; // Base score
 
     // Missing headers (up to +3)
