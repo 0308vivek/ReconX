@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReconX - Reconnaissance Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hologram-overlay"></div>
+    
+    <nav class="topbar">
+        <div class="logo">Recon<span>X</span></div>
+        <a href="/" class="return-btn">&lt; New Scan</a>
+    </nav>
+
+    <div class="container dashboard-container hidden" id="dashboardContent">
+        <header class="dash-header">
+            <div>
+                <h2>Target Analysis: <span id="targetDomain" class="highlight"></span></h2>
+                <div class="target-ip">IP Address: <span id="targetIp"></span></div>
+            </div>
+            
+            <div id="riskBadge" class="risk-badge">
+                <div class="risk-title">OVERALL RISK SCORE</div>
+                <div class="risk-score-display"><span id="riskScore"></span>/10 <span id="riskLevel"></span></div>
+            </div>
+        </header>
+
+        <div class="grid-layout">
+            <!-- Open Ports & Services -->
+            <div class="panel">
+                <div class="panel-header">Open Ports</div>
+                <div class="panel-content">
+                    <ul id="portsList" class="data-list tags-list"></ul>
+                </div>
+            </div>
+
+            <!-- Discovered Directories -->
+            <div class="panel">
+                <div class="panel-header">Discovered Directories</div>
+                <div class="panel-content">
+                    <ul id="dirsList" class="data-list directory-list"></ul>
+                </div>
+            </div>
+
+            <!-- Security Headers Analysis -->
+            <div class="panel col-span-2">
+                <div class="panel-header">Security Headers Analysis</div>
+                <div class="panel-content flex-row">
+                    <div class="half-panel">
+                        <h3>Present Headers</h3>
+                        <pre id="presentHeaders" class="code-block"></pre>
+                    </div>
+                    <div class="half-panel">
+                        <h3>Missing Headers</h3>
+                        <ul id="missingHeaders" class="data-list alert-list"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SSL Analysis -->
+            <div class="panel">
+                <div class="panel-header">SSL/TLS Analysis</div>
+                <div class="panel-content">
+                    <div class="info-grid" id="sslInfo">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies Detected -->
+            <div class="panel">
+                <div class="panel-header">Technologies Detected</div>
+                <div class="panel-content">
+                    <ul id="techList" class="data-list tags-list"></ul>
+                </div>
+            </div>
+
+            <!-- Subdomains -->
+            <div class="panel col-span-2">
+                <div class="panel-header">Subdomains Discovered (<span id="subCount">0</span>)</div>
+                <div class="panel-content max-h-scroll">
+                    <ul id="subdomainsList" class="data-list plain-list column-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="noDataError" class="container hidden error-state">
+        <h2>No Scan Data Found</h2>
+        <p>Please initiate a new scan from the home page.</p>
+        <a href="/" class="return-btn">Go to Home</a>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script>
+        // Check for report data on dashboard load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname === '/dashboard') {
+                const reportStr = localStorage.getItem('reconReport');
+                if (reportStr) {
+                    try {
+                        const report = JSON.parse(reportStr);
+                        renderDashboard(report);
+                        document.getElementById('dashboardContent').classList.remove('hidden');
+                    } catch (e) {
+                        document.getElementById('noDataError').classList.remove('hidden');
+                    }
+                } else {
+                    document.getElementById('noDataError').classList.remove('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

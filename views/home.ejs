@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReconX - Cybersecurity Reconnaissance</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hologram-overlay"></div>
+    <div class="container home-container">
+        <header class="glitch-wrapper">
+            <h1 class="glitch" data-text="ReconX">ReconX</h1>
+            <p class="subtitle">Automated Security Intelligence Gathering</p>
+        </header>
+
+        <main class="scan-box">
+            <form id="scanForm">
+                <div class="input-group">
+                    <span class="prompt-symbol">root@reconx:~#</span>
+                    <input type="text" id="domainInput" placeholder="Enter target domain (e.g., example.com)" required autocomplete="off" spellcheck="false" autofocus>
+                </div>
+                <button type="submit" id="scanBtn" class="cyber-btn">
+                    <span class="btn-text">Start Recon Scan</span>
+                    <span class="btn-glitch"></span>
+                </button>
+            </form>
+
+            <div id="loader" class="loader-container hidden">
+                <div class="spinner"></div>
+                <p id="loadingText" class="terminal-text">Initializing scanning sequence...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            
+            <div id="errorBox" class="error-box hidden"></div>
+        </main>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
