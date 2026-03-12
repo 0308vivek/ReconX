@@ -12,7 +12,7 @@ const runPythonScript = (scriptName, domain) => {
         const scriptPath = path.join(__dirname, '..', 'python_modules', scriptName);
         
         // Execute the python script with the domain as an argument
-        exec(`python3 ${scriptPath} ${domain}`, (error, stdout, stderr) => {
+        exec(`python ${scriptPath} ${domain}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`[Error running ${scriptName}]:`, stderr);
                 return resolve({ error: `Failed to execute ${scriptName}` });
