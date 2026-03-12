@@ -252,11 +252,3 @@ ReconX generates a report containing:
 
 This tool is intended for **educational purposes and authorized security testing only**. Do not scan systems without proper permission.
 
----
-
-## Author
-
-Vivek Prasad
-
-B.Tech Computer Science & Engineering
-Cybersecurity and Full Stack Development
